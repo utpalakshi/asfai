@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASAFI // Technical Memorandum & Specification Portal (NASA SP-2026)</title>
+  <meta name="description" content="Technical documentation and flight specification report for ASAFI (Autonomous Spacecraft Avionics Fire Interceptor)." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            nasa: {
+              blue: '#105bd8',
+              hover: '#0b4dbf',
+              red: '#e03c31',
+              dark: '#060911',
+              surface: '#0c121e',
+              card: '#121a2a',
+              border: 'rgba(255, 255, 255, 0.12)'
+            },
+            cyanx: '#00e5ff',
+            solar: '#ff8a00'
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Consolas', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-nasa-dark text-slate-100 font-sans antialiased selection:bg-nasa-blue selection:text-white">
+
+  <!-- ========================================================================
+       TOP MASTHEAD FOR DOCS
+       ======================================================================== -->
+  <header class="sticky top-0 z-50 bg-nasa-dark/95 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Left: Brand -->
+        <a href="index.html" class="flex items-center gap-3">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-nasa-blue flex items-center justify-center font-mono text-xs font-black text-white shadow-md border border-white/20">
+            A
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-bold tracking-tight text-white text-base sm:text-lg">ASAFI</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-blue-600/30 font-mono text-cyanx font-semibold">TECHNICAL SPEC</span>
+            </div>
+            <span class="text-[10px] tracking-wider uppercase text-slate-400 font-mono hidden sm:block">NASA SP / VIT-AP MEMORANDUM</span>
+          </div>
+        </a>
+
+        <!-- Right: Actions -->
+        <div class="flex items-center gap-3">
+          <button onclick="window.print()" class="hidden sm:inline-flex btn-nasa-secondary text-xs py-2 px-3 items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+            Print / Save PDF
+          </button>
+          <a href="index.html" class="btn-nasa-primary text-xs py-2 px-4 flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+            Back to Mission Portal
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       DOCUMENT HEADER & METADATA BANNER
+       ======================================================================== -->
+  <div class="bg-nasa-surface border-b border-white/10 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-2 mb-2 font-mono text-xs">
+            <span class="badge-nasa">DOC SERIES: SP-2026-09</span>
+            <span class="text-slate-400">CLASSIFICATION: PUBLIC RELEASE</span>
+          </div>
+          <h1 class="text-2xl sm:text-4xl font-extrabold text-white uppercase tracking-tight">
+            ASAFI System Technical Memorandum
+          </h1>
+          <p class="text-sm sm:text-base text-slate-300 mt-2">
+            Autonomous Spacecraft Avionics Fire Interceptor — Sensor Fusion Architecture, Edge Perception, Gimbal Kinematics, and Cold-Gas Actuation Dynamics.
+          </p>
+        </div>
+
+        <div class="bg-nasa-dark p-4 rounded border border-white/10 font-mono text-xs space-y-1.5 text-slate-300">
+          <div class="flex justify-between"><span class="text-slate-500">PROJECT:</span> <span>ASAFI-LEO-01</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">INSTITUTION:</span> <span>VIT-AP University</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">PROGRAM:</span> <span>Engineering Clinics</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">AUTHORS:</span> <span class="text-cyanx">Paakhi &amp; Rahul</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">STATUS:</span> <span class="text-emerald-400">TRL-5 VERIFIED</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MAIN DOCUMENT BODY WITH SIDEBAR NAV
+       ======================================================================== -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      
+      <!-- Table of Contents Sidebar -->
+      <aside class="hidden lg:block lg:col-span-3">
+        <div class="sticky top-28 p-5 bg-nasa-surface rounded border border-white/10 text-xs font-mono space-y-3">
+          <h3 class="font-bold text-white uppercase tracking-wider pb-2 border-b border-white/10">Contents</h3>
+          <ul class="space-y-2 text-slate-400">
+            <li><a href="#section1" class="hover:text-cyanx block">1. Executive Summary</a></li>
+            <li><a href="#section2" class="hover:text-cyanx block">2. System Architecture</a></li>
+            <li><a href="#section3" class="hover:text-cyanx block">3. Sensor &amp; Actuator Specs</a></li>
+            <li><a href="#section4" class="hover:text-cyanx block">4. State Machine Sequence</a></li>
+            <li><a href="#section5" class="hover:text-cyanx block">5. Wiring &amp; Pinout Table</a></li>
+            <li><a href="#section6" class="hover:text-cyanx block">6. Bill of Materials (BOM)</a></li>
+            <li><a href="#section7" class="hover:text-cyanx block">7. Team &amp; Faculty Review</a></li>
+          </ul>
+          <div class="pt-4 border-t border-white/10">
+            <a href="index.html" class="text-cyanx hover:underline flex items-center gap-1">
+              ← Main Landing Page
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Technical Content -->
+      <article class="lg:col-span-9 space-y-16">
+        
+        <!-- SECTION 1: EXECUTIVE SUMMARY -->
+        <section id="section1" class="space-y-4">
+          <div class="flex items-center gap-2">
+            <span class="badge-nasa">01 // INTRODUCTION</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">
+            1. Executive Summary &amp; Problem Statement
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            In microgravity spaceflight environments, the absence of natural buoyancy inhibits traditional convective air movement. Electrical arcs, short circuits, or battery overheating inside sealed spacecraft avionics bays form localized, oxygen-starved smoldering pockets. Traditional whole-cabin flooding fire suppression systems introduce excessive toxic residue, cause mission-critical avionics shorting, and require human intervention that incurs prohibitive reaction delay (often &gt; 30 to 90 seconds).
+          </p>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <strong>ASAFI (Autonomous Spacecraft Avionics Fire Interceptor)</strong> introduces a closed-loop, localized autonomous payload combining edge computer vision (OpenCV), contactless infrared pyrometry (MLX90614), rapid 2-axis pan-tilt vectoring, and a high-speed 12V micro-solenoid cold-gas valve. Reaction latency is compressed to <strong>&lt; 120 milliseconds</strong>, neutralizing combustion at ignition without risking peripheral electronics.
+          </p>
+        </section>
+
+        <!-- SECTION 2: SYSTEM ARCHITECTURE -->
+        <section id="section2" class="space-y-6">
+          <div class="flex items-center gap-2">
+            <span class="badge-nasa">02 // ARCHITECTURE</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">
+            2. System Architecture &amp; Dataflow
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            The telemetry pipeline utilizes a two-tier verification architecture: Tier 1 (Optical Stream) executes continuous background frame analysis for spatial luminescence anomalies. Upon threshold exceedance, Tier 2 (Infrared Radiometer) takes direct temperature samples while directing the pan-tilt gimbal to align the nozzle vector.
+          </p>
+
+          <!-- System Architecture Diagram (SVG Block Diagram) -->
+          <div class="p-6 bg-nasa-surface rounded border border-white/15 overflow-x-auto">
+            <svg class="w-full min-w-[640px] h-64" viewBox="0 0 800 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Background grid lines -->
+              <defs>
+                <linearGradient id="boxGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#121a2a" />
+                  <stop offset="100%" stop-color="#0c121e" />
+                </linearGradient>
+                <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="#00e5ff"/>
+                </marker>
+              </defs>
+
+              <!-- Node 1: Optical Camera -->
+              <rect x="20" y="30" width="140" height="70" rx="4" fill="url(#boxGrad)" stroke="#00e5ff" stroke-width="1.5" />
+              <text x="90" y="60" fill="#00e5ff" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">OPTICAL CAMERA</text>
+              <text x="90" y="78" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">Visual Stream (60 FPS)</text>
+
+              <!-- Arrow 1 to 2 -->
+              <line x1="160" y1="65" x2="220" y2="65" stroke="#00e5ff" stroke-width="2" marker-end="url(#arrow)" />
+
+              <!-- Node 2: Edge CV Engine -->
+              <rect x="220" y="30" width="160" height="70" rx="4" fill="url(#boxGrad)" stroke="#105bd8" stroke-width="1.5" />
+              <text x="300" y="60" fill="#60a5fa" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">OPENCV PERCEPTION</text>
+              <text x="300" y="78" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">HSV &amp; Spark Contours</text>
+
+              <!-- Node 3: MLX90614 IR -->
+              <rect x="220" y="140" width="160" height="70" rx="4" fill="url(#boxGrad)" stroke="#ff8a00" stroke-width="1.5" />
+              <text x="300" y="170" fill="#ff8a00" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">MLX90614 SENSOR</text>
+              <text x="300" y="188" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">IR Thermal Gradient</text>
+
+              <!-- Arrow 2 to 4 & Arrow 3 to 4 -->
+              <line x1="380" y1="65" x2="440" y2="105" stroke="#00e5ff" stroke-width="2" marker-end="url(#arrow)" />
+              <line x1="380" y1="175" x2="440" y2="135" stroke="#ff8a00" stroke-width="2" marker-end="url(#arrow)" />
+
+              <!-- Node 4: Decision Logic -->
+              <rect x="440" y="85" width="150" height="70" rx="4" fill="url(#boxGrad)" stroke="#00e676" stroke-width="1.5" />
+              <text x="515" y="115" fill="#4ade80" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">FLIGHT COMPUTER</text>
+              <text x="515" y="133" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">Target Lock &amp; Safety</text>
+
+              <!-- Arrows to Actuators -->
+              <line x1="590" y1="105" x2="650" y2="65" stroke="#00e5ff" stroke-width="2" marker-end="url(#arrow)" />
+              <line x1="590" y1="135" x2="650" y2="175" stroke="#00e5ff" stroke-width="2" marker-end="url(#arrow)" />
+
+              <!-- Node 5: 2-Axis Gimbal -->
+              <rect x="650" y="30" width="130" height="70" rx="4" fill="url(#boxGrad)" stroke="#00e5ff" stroke-width="1.5" />
+              <text x="715" y="60" fill="#00e5ff" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">2-AXIS GIMBAL</text>
+              <text x="715" y="78" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">Servo Az / El Vector</text>
+
+              <!-- Node 6: 12V Solenoid -->
+              <rect x="650" y="140" width="130" height="70" rx="4" fill="url(#boxGrad)" stroke="#00e676" stroke-width="1.5" />
+              <text x="715" y="170" fill="#4ade80" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">12V VALVE NOZZLE</text>
+              <text x="715" y="188" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">Cold-Gas Pulse (150 PSI)</text>
+            </svg>
+          </div>
+        </section>
+
+        <!-- SECTION 3: SUBSYSTEM SPECS -->
+        <section id="section3" class="space-y-6">
+          <div class="flex items-center gap-2">
+            <span class="badge-nasa">03 // HARDWARE SUITE</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">
+            3. Detailed Subsystem Specifications
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Optical Specs -->
+            <div class="bg-nasa-surface p-6 rounded border border-white/10">
+              <span class="text-xs font-mono text-cyanx font-bold">SUBSYSTEM 01</span>
+              <h3 class="text-lg font-bold text-white mt-1">Optical Camera &amp; Vision</h3>
+              <ul class="mt-4 space-y-2 font-mono text-xs text-slate-300">
+                <li>• <strong>Resolution:</strong> 1920 × 1080 @ 60 FPS</li>
+                <li>• <strong>Field of View:</strong> 120° Wide Angle Lens</li>
+                <li>• <strong>Color Space:</strong> HSV Thresholding &amp; Grayscale</li>
+                <li>• <strong>Processing Latency:</strong> ~16ms per frame</li>
+                <li>• <strong>Trigger:</strong> Rapid luminescence contour delta</li>
+              </ul>
+            </div>
+
+            <!-- MLX90614 Specs -->
+            <div class="bg-nasa-surface p-6 rounded border border-white/10">
+              <span class="text-xs font-mono text-solar font-bold">SUBSYSTEM 02</span>
+              <h3 class="text-lg font-bold text-white mt-1">MLX90614 Contactless IR</h3>
+              <ul class="mt-4 space-y-2 font-mono text-xs text-slate-300">
+                <li>• <strong>Target Temp Range:</strong> -70°C to +380°C</li>
+                <li>• <strong>Ambient Range:</strong> -40°C to +125°C</li>
+                <li>• <strong>Accuracy:</strong> ±0.5°C in room temperature</li>
+                <li>• <strong>Resolution:</strong> 0.02°C thermal sensitivity</li>
+                <li>• <strong>Interface:</strong> I2C / SMBus (100 kHz)</li>
+              </ul>
+            </div>
+
+            <!-- Gimbal Specs -->
+            <div class="bg-nasa-surface p-6 rounded border border-white/10">
+              <span class="text-xs font-mono text-blue-400 font-bold">SUBSYSTEM 03</span>
+              <h3 class="text-lg font-bold text-white mt-1">Dual-Axis Pan-Tilt Gimbal</h3>
+              <ul class="mt-4 space-y-2 font-mono text-xs text-slate-300">
+                <li>• <strong>Azimuth Sweep:</strong> 0° to 180° (Horizontal)</li>
+                <li>• <strong>Elevation Sweep:</strong> 15° to 90° (Vertical)</li>
+                <li>• <strong>Torque:</strong> 2.5 kg·cm high-torque metal gear</li>
+                <li>• <strong>Slew Speed:</strong> 0.10s / 60 degrees</li>
+                <li>• <strong>Control:</strong> 50Hz PWM Signal</li>
+              </ul>
+            </div>
+
+            <!-- Solenoid Specs -->
+            <div class="bg-nasa-surface p-6 rounded border border-white/10">
+              <span class="text-xs font-mono text-emerald-400 font-bold">SUBSYSTEM 04</span>
+              <h3 class="text-lg font-bold text-white mt-1">12V Micro-Solenoid Interceptor</h3>
+              <ul class="mt-4 space-y-2 font-mono text-xs text-slate-300">
+                <li>• <strong>Operating Voltage:</strong> 12V DC (MOSFET switched)</li>
+                <li>• <strong>Actuation Time:</strong> &lt; 12ms valve open</li>
+                <li>• <strong>Suppressant Gas:</strong> Compressed Clean Nitrogen (N2)</li>
+                <li>• <strong>Operating Pressure:</strong> 100 – 150 PSI</li>
+                <li>• <strong>Safety Interlock:</strong> 500ms max automatic pulse cutoff</li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SECTION 4: STATE MACHINE -->
+        <section id="section4" class="space-y-6">
+          <div class="flex items-center gap-2">
+            <span class="badge-nasa">04 // SOFTWARE ALGORITHM</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">
+            4. Software State Machine &amp; Safety Sequence
+          </h2>
+          <div class="p-6 bg-nasa-surface rounded border border-white/10 font-mono text-xs space-y-4">
+            <div class="flex items-start gap-4">
+              <span class="px-2 py-1 rounded bg-blue-600/30 text-cyanx font-bold">STATE 0</span>
+              <div>
+                <b class="text-white">SURVEILLANCE / NOMINAL</b>
+                <p class="text-slate-400 mt-1">Continuous OpenCV background sampling (1080p @ 60 FPS). Servos stationary at default home position.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="px-2 py-1 rounded bg-yellow-500/20 text-yellow-300 font-bold">STATE 1</span>
+              <div>
+                <b class="text-white">ANOMALY CANDIDATE DETECTED</b>
+                <p class="text-slate-400 mt-1">OpenCV detects sudden local illumination spike above delta threshold. Bounding box coordinates calculated.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="px-2 py-1 rounded bg-orange-500/20 text-solar font-bold">STATE 2</span>
+              <div>
+                <b class="text-white">THERMAL CO-VALIDATION &amp; SLEW</b>
+                <p class="text-slate-400 mt-1">Pan-tilt gimbal slews MLX90614 sensor toward calculated target azimuth/elevation. IR reads object temperature. If Temp &gt; 65.0°C, target confirmed.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="px-2 py-1 rounded bg-red-600/30 text-nasa-red font-bold">STATE 3</span>
+              <div>
+                <b class="text-white">INTERCEPTION PULSE DISCHARGE</b>
+                <p class="text-slate-400 mt-1">MOSFET gates high for 150ms. 12V valve fires pressurized cold-gas jet directly onto hot spot.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="px-2 py-1 rounded bg-emerald-500/20 text-emerald-400 font-bold">STATE 4</span>
+              <div>
+                <b class="text-white">POST-ACTION VERIFICATION</b>
+                <p class="text-slate-400 mt-1">MLX90614 measures cooling rate. If Temp &lt; 45°C, log telemetry event, return gimbal to home, and resume State 0.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5: PINOUT TABLE -->
+        <section id="section5" class="space-y-6">
+          <div class="flex items-center gap-2">
+            <span class="badge-nasa">05 // ELECTRICAL SCHEMATIC</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">
+            5. Wiring &amp; Electrical Pinout Reference
+          </h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left font-mono text-xs border border-white/10 bg-nasa-surface">
+              <thead class="bg-nasa-dark border-b border-white/15 text-slate-400">
+                <tr>
+                  <th class="p-3">Device Module</th>
+                  <th class="p-3">Signal Line</th>
+                  <th class="p-3">Flight Controller Pin</th>
+                  <th class="p-3">Voltage / Logic</th>
+                  <th class="p-3">Function</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-white/5 text-slate-300">
+                <tr>
+                  <td class="p-3 font-semibold text-white">MLX90614 Sensor</td>
+                  <td class="p-3 text-cyanx">SDA</td>
+                  <td class="p-3">GPIO 2 (Pin 3)</td>
+                  <td class="p-3">3.3V I2C</td>
+                  <td class="p-3">Serial Data Communication</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-semibold text-white">MLX90614 Sensor</td>
+                  <td class="p-3 text-cyanx">SCL</td>
+                  <td class="p-3">GPIO 3 (Pin 5)</td>
+                  <td class="p-3">3.3V I2C</td>
+                  <td class="p-3">Serial Clock Pulse</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-semibold text-white">Pan Servo (Azimuth)</td>
+                  <td class="p-3 text-solar">PWM1</td>
+                  <td class="p-3">GPIO 18 (Pin 12)</td>
+                  <td class="p-3">5.0V PWM</td>
+                  <td class="p-3">0-180° Horizontal Aim</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-semibold text-white">Tilt Servo (Elevation)</td>
+                  <td class="p-3 text-solar">PWM2</td>
+                  <td class="p-3">GPIO 19 (Pin 35)</td>
+                  <td class="p-3">5.0V PWM</td>
+                  <td class="p-3">15-90° Vertical Aim</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-semibold text-white">12V Solenoid Driver</td>
+                  <td class="p-3 text-nasa-red">GATE</td>
+                  <td class="p-3">GPIO 23 (Pin 16)</td>
+                  <td class="p-3">3.3V Logic → 12V FET</td>
+                  <td class="p-3">Valve Micro-Pulse Trigger</td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-semibold text-white">Optical Camera Module</td>
+                  <td class="p-3 text-blue-400">CSI / USB</td>
+                  <td class="p-3">Dedicated Ribbon</td>
+                  <td class="p-3">High-Speed MIPI</td>
+                  <td class="p-3">1080p60 Visual Telemetry</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- SECTION 6: BILL OF MATERIALS (BOM) -->
+        <section id="section6" class="space-y-6">
+          <div class="flex items-center gap-2">
+            <span class="badge-nasa">06 // BUDGET &amp; BOM</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">
+            6. Bill of Materials (BOM) &amp; Procurement Table
+          </h2>
+          <p class="text-slate-300 text-sm">
+            Detailed component breakdown prepared for Engineering Clinics (ECS) laboratory reimbursement and hardware procurement tracking.
+          </p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left font-mono text-xs border border-white/10 bg-nasa-surface">
+              <thead class="bg-nasa-dark border-b border-white/15 text-slate-400">
+                <tr>
+                  <th class="p-3">Item #</th>
+                  <th class="p-3">Component Description</th>
+                  <th class="p-3">Part / Model</th>
+                  <th class="p-3">Qty</th>
+                  <th class="p-3">Est. Cost (INR)</th>
+                  <th class="p-3">Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-white/5 text-slate-300">
+                <tr>
+                  <td class="p-3">BOM-01</td>
+                  <td class="p-3 font-semibold text-white">Infrared Non-Contact Thermometer</td>
+                  <td class="p-3 text-slate-400">Melexis MLX90614-ESF-BAA</td>
+                  <td class="p-3">1</td>
+                  <td class="p-3">₹ 1,250</td>
+                  <td class="p-3 text-emerald-400">✓ Procured</td>
+                </tr>
+                <tr>
+                  <td class="p-3">BOM-02</td>
+                  <td class="p-3 font-semibold text-white">Wide-Angle 1080p Optical Camera</td>
+                  <td class="p-3 text-slate-400">Sony IMX219 / 120° FOV</td>
+                  <td class="p-3">1</td>
+                  <td class="p-3">₹ 1,800</td>
+                  <td class="p-3 text-emerald-400">✓ Procured</td>
+                </tr>
+                <tr>
+                  <td class="p-3">BOM-03</td>
+                  <td class="p-3 font-semibold text-white">Dual-Axis Metal Gear Gimbal Servos</td>
+                  <td class="p-3 text-slate-400">MG996R High-Torque (2x)</td>
+                  <td class="p-3">2</td>
+                  <td class="p-3">₹ 980</td>
+                  <td class="p-3 text-emerald-400">✓ Procured</td>
+                </tr>
+                <tr>
+                  <td class="p-3">BOM-04</td>
+                  <td class="p-3 font-semibold text-white">12V DC Micro-Solenoid Gas Valve</td>
+                  <td class="p-3 text-slate-400">Normally Closed 1/4" NPT</td>
+                  <td class="p-3">1</td>
+                  <td class="p-3">₹ 650</td>
+                  <td class="p-3 text-emerald-400">✓ Procured</td>
+                </tr>
+                <tr>
+                  <td class="p-3">BOM-05</td>
+                  <td class="p-3 font-semibold text-white">Pressurized Nitrogen Mini Reservoir</td>
+                  <td class="p-3 text-slate-400">16g N2 Cartridge + Regulator</td>
+                  <td class="p-3">2</td>
+                  <td class="p-3">₹ 750</td>
+                  <td class="p-3 text-emerald-400">✓ Tested</td>
+                </tr>
+                <tr>
+                  <td class="p-3">BOM-06</td>
+                  <td class="p-3 font-semibold text-white">MOSFET Actuator Switch Circuit</td>
+                  <td class="p-3 text-slate-400">IRLZ44N Logic Level + Diode</td>
+                  <td class="p-3">1</td>
+                  <td class="p-3">₹ 120</td>
+                  <td class="p-3 text-emerald-400">✓ Assembled</td>
+                </tr>
+                <tr>
+                  <td class="p-3">BOM-07</td>
+                  <td class="p-3 font-semibold text-white">3D Printed Gimbal Bracket Chassis</td>
+                  <td class="p-3 text-slate-400">PETG Aerospace Bracket</td>
+                  <td class="p-3">1</td>
+                  <td class="p-3">₹ 350</td>
+                  <td class="p-3 text-emerald-400">✓ Fabricated</td>
+                </tr>
+              </tbody>
+              <tfoot class="border-t border-white/15 bg-nasa-dark text-white font-bold">
+                <tr>
+                  <td colspan="4" class="p-3 text-right">TOTAL ESTIMATED BUDGET:</td>
+                  <td colspan="2" class="p-3 text-cyanx">₹ 5,900 INR</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </section>
+
+        <!-- SECTION 7: PROJECT TEAM & ROLES -->
+        <section id="section7" class="space-y-6">
+          <div class="flex items-center gap-2">
+            <span class="badge-nasa">07 // TEAM ROSTER</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">
+            7. Engineering Clinics Project Roster
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="bg-nasa-surface p-6 rounded border border-white/10">
+              <span class="text-xs font-mono text-cyanx font-bold">LEAD FLIGHT ENGINEER</span>
+              <h3 class="text-xl font-bold text-white mt-1">Paakhi</h3>
+              <p class="text-xs font-mono text-slate-400 mt-2">VIT-AP University · Engineering Clinics</p>
+              <p class="text-sm text-slate-300 mt-3">
+                Responsible for Optical Computer Vision pipeline, OpenCV algorithms, MLX90614 sensor integration, and system documentation.
+              </p>
+            </div>
+
+            <div class="bg-nasa-surface p-6 rounded border border-white/10">
+              <span class="text-xs font-mono text-solar font-bold">LEAD SYSTEMS ENGINEER</span>
+              <h3 class="text-xl font-bold text-white mt-1">Rahul</h3>
+              <p class="text-xs font-mono text-slate-400 mt-2">VIT-AP University · Engineering Clinics</p>
+              <p class="text-sm text-slate-300 mt-3">
+                Responsible for 2-axis servo kinematics, 12V solenoid valve actuation, pressurized cold-gas manifold design, and physical testbed.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </article>
+
+    </div>
+  </div>
+
+  <!-- NASA Minimal Docs Footer -->
+  <footer class="border-t border-white/10 bg-nasa-dark py-8 text-center font-mono text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div>ASAFI // NASA SP Technical Series // VIT-AP Engineering Clinics</div>
+      <div class="flex gap-4">
+        <a href="index.html" class="text-cyanx hover:underline">Return to Landing Page</a>
+        <span class="text-slate-700">|</span>
+        <button onclick="window.print()" class="text-slate-400 hover:text-white">Print Technical Doc</button>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
