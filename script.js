@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
       spec: "Range: -70°C to +380°C | Accuracy: ±0.5°C | Thermal Resolution: 0.02°C"
     },
     plume: {
-      src: "https://images.unsplash.com/photo-1517976487502-59837d9c6be3?q=80&w=1600&auto=format&fit=crop",
+      src: "./assets/coldspray.jpg",
       badge: "COLD-GAS INTERCEPT // 12V SOLENOID",
       title: "Sub-Second Micro-Pulse Interception",
       desc: "Clean-agent nitrogen burst dispenses directly onto anomalous wiring, suppressing combustion before runaway.",
