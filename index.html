@@ -81,7 +81,6 @@
           <a href="#gallery" class="px-3 py-2 hover:text-white transition-colors">Visuals</a>
           <a href="#sensors" class="px-3 py-2 hover:text-white transition-colors">Sensors</a>
           <a href="#lifecycle" class="px-3 py-2 hover:text-white transition-colors">Operations</a>
-          <a href="#telemetry" class="px-3 py-2 hover:text-white transition-colors">Telemetry</a>
           <a href="doc.html" class="px-3 py-2 text-cyanx hover:text-cyan-300 flex items-center gap-1">
             <span>Docs</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
@@ -112,7 +111,6 @@
         <a href="#gallery" class="block px-3 py-2 text-slate-300 hover:text-white hover:bg-white/5 rounded">Featured Visuals</a>
         <a href="#sensors" class="block px-3 py-2 text-slate-300 hover:text-white hover:bg-white/5 rounded">Sensor Array</a>
         <a href="#lifecycle" class="block px-3 py-2 text-slate-300 hover:text-white hover:bg-white/5 rounded">3-Stage Sequence</a>
-        <a href="#telemetry" class="block px-3 py-2 text-slate-300 hover:text-white hover:bg-white/5 rounded">Mission Telemetry</a>
         <a href="doc.html" class="block px-3 py-2 text-cyanx font-bold hover:bg-white/5 rounded">Technical Documentation (NASA SP) →</a>
       </div>
     </div>
@@ -167,9 +165,9 @@
               <span>Flight Specification Manual</span>
             </a>
 
-            <a href="#telemetry" class="inline-flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-slate-400 hover:text-cyanx transition-colors px-2 py-3">
+            <a href="#sensors" class="inline-flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-slate-400 hover:text-cyanx transition-colors px-2 py-3">
               <span class="w-2 h-2 rounded-full bg-cyanx"></span>
-              Live Telemetry HUD
+              Interactive Sensor HUD
             </a>
           </div>
         </div>
@@ -268,15 +266,16 @@
         <!-- Card 2: MLX90614 Thermal IR -->
         <article class="gallery-item nasa-card group rounded" data-category="sensors">
           <a href="#" class="open-lightbox block relative aspect-square sm:aspect-auto sm:h-full overflow-hidden"
-             data-img="https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=1600&auto=format&fit=crop"
+             data-img="./assets/introduction-to-mlx90614.jpg"
              data-title="MLX90614 Thermal Gradient Spectrum"
              data-desc="Contactless thermopile infrared sensor resolves 0.02°C temperature anomalies across avionics wiring harness."
              data-tag="THERMAL SENSING">
             
             <img 
-              src="https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=800&auto=format&fit=crop" 
-              alt="Thermal heat gradient infrared capture" 
-              class="card-img w-full h-full object-cover brightness-90"
+              src="./assets/introduction-to-mlx90614.jpg" 
+              alt="MLX90614 Infrared Sensor testing" 
+              class="card-img w-full h-full object-cover object-center brightness-90"
+              style="object-fit: cover; object-position: center;"
               loading="lazy"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-nasa-dark via-nasa-dark/20 to-transparent"></div>
@@ -329,12 +328,12 @@
           </a>
         </article>
 
-        <!-- Card 4: Edge Computer Vision -->
+        <!-- Card 4: Edge Computer Vision (YOLOv11) -->
         <article class="gallery-item nasa-card group rounded" data-category="avionics">
           <a href="#" class="open-lightbox block relative aspect-[4/3] overflow-hidden"
              data-img="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop"
-             data-title="Edge OpenCV Perception Loop"
-             data-desc="60 FPS onboard vision pipeline performing frame differentiation and HSV spark identification on flight computer."
+             data-title="Edge YOLOv11 Perception Loop"
+             data-desc="Space-grade onboard vision pipeline running YOLOv11 inference to isolate electrical arc flashes and thermal anomalies."
              data-tag="EDGE COMPUTING">
             
             <img 
@@ -346,13 +345,13 @@
             <div class="absolute inset-0 bg-gradient-to-t from-nasa-dark via-nasa-dark/20 to-transparent"></div>
             
             <div class="absolute top-4 left-4">
-              <span class="badge-nasa">CV PIPELINE</span>
+              <span class="badge-nasa">YOLOV11 PIPELINE</span>
             </div>
 
             <div class="absolute bottom-5 left-5 right-5">
-              <span class="text-xs font-mono text-cyanx uppercase tracking-wider">60 FPS Perception</span>
+              <span class="text-xs font-mono text-cyanx uppercase tracking-wider">YOLOv11 Edge Inference</span>
               <h3 class="text-base sm:text-lg font-bold text-white mt-1">
-                OpenCV Visual Hazard Loop
+                YOLOv11 Visual Hazard Loop
               </h3>
               <p class="text-xs text-slate-300 mt-1 line-clamp-2">
                 Zero-cloud autonomous detection running natively on local embedded flight hardware.
@@ -414,7 +413,7 @@
           <!-- Sensor Selector Buttons -->
           <div class="mt-8 flex flex-wrap justify-center gap-3 font-mono text-xs">
             <button class="sensor-tab active px-4 py-2.5 rounded border border-blue-500 bg-blue-600/20 text-white font-semibold transition" data-sensor="optical">
-              01 // Optical Camera (CV)
+              01 // Optical Camera (YOLOv11)
             </button>
             <button class="sensor-tab px-4 py-2.5 rounded border border-white/10 bg-white/5 text-slate-400 hover:text-white font-semibold transition" data-sensor="thermal">
               02 // MLX90614 Radiometer
@@ -431,7 +430,7 @@
           <!-- Image Viewport with HUD Reticle -->
           <div class="relative aspect-[16/9] overflow-hidden hud-reticle">
             <img 
-              id="sensorDisplayImg"
+              id="sensorDisplayImg" 
               src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop" 
               alt="Sensor Display" 
               class="w-full h-full object-cover transition-opacity duration-300"
@@ -442,8 +441,8 @@
 
             <!-- Top Left HUD Telemetry Overlay -->
             <div class="absolute top-4 left-4 font-mono text-[10px] sm:text-xs space-y-1 bg-nasa-dark/80 backdrop-blur p-2.5 rounded border border-white/10">
-              <div class="text-cyanx font-bold" id="sensorDisplayBadge">OPTICAL SENSING // 4K CV STREAM</div>
-              <div class="text-slate-400">FRAME RATE: <span class="text-white">60.0 FPS</span></div>
+              <div class="text-cyanx font-bold" id="sensorDisplayBadge">OPTICAL SENSING // YOLOV11 STREAM</div>
+              <div class="text-slate-400">FRAME RATE: <span class="text-white">15 FPS (VGA)</span></div>
               <div class="text-slate-400">TARGET ACQUISITION: <span class="text-emerald-400">NOMINAL</span></div>
             </div>
 
@@ -461,14 +460,14 @@
                 High-Speed Avionics Visual Tracking
               </h3>
               <p id="sensorDisplayDesc" class="text-slate-300 text-sm mt-1 max-w-2xl">
-                Edge-computed OpenCV detection runs at 60 FPS, isolating localized spark discharges and smoke particulate signatures.
+                Edge-computed YOLOv11 detection operates at 15 FPS, isolating localized electrical arc discharges and thermal ignition signatures.
               </p>
             </div>
 
             <div class="border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6">
               <div class="font-mono text-xs text-slate-400 uppercase tracking-wider">Specifications</div>
               <div id="sensorDisplaySpec" class="font-mono text-xs text-cyanx font-semibold mt-1">
-                Latency: &lt;16.6ms | Resolution: 1080p60 | Algorithm: HSV Contour
+                Latency: &lt;20ms | Resolution: 640 × 480 @ 15 FPS | Architecture: YOLOv11 Nano
               </div>
             </div>
           </div>
@@ -498,9 +497,10 @@
         <div class="nasa-card rounded overflow-hidden flex flex-col">
           <div class="relative aspect-video overflow-hidden">
             <img 
-              src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?q=80&w=800&auto=format&fit=crop" 
-              alt="Stage 1: Detect" 
-              class="card-img w-full h-full object-cover brightness-85"
+              src="./assets/visual.jpeg" 
+              alt="Stage 1: Detect - Visual Anomaly Scan" 
+              class="card-img w-full h-full object-cover object-center brightness-90"
+              style="object-fit: cover; object-position: center;"
               loading="lazy"
             />
             <div class="absolute top-3 left-3">
@@ -511,7 +511,7 @@
             <div>
               <h3 class="text-xl font-bold text-white">Visual Anomaly Scan</h3>
               <p class="text-sm text-slate-300 mt-2">
-                Optical camera continuously samples the avionics enclosure. OpenCV frame differencing identifies sparks or flame luminescence.
+                Optical camera continuously samples the avionics enclosure. Space-grade YOLOv11 inference identifies localized electrical arcs and flame luminescence.
               </p>
             </div>
             <div class="mt-6 pt-4 border-t border-white/10 font-mono text-[11px] text-cyanx flex justify-between">
@@ -525,9 +525,10 @@
         <div class="nasa-card rounded overflow-hidden flex flex-col">
           <div class="relative aspect-video overflow-hidden">
             <img 
-              src="https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=800&auto=format&fit=crop" 
-              alt="Stage 2: Target Lock" 
-              class="card-img w-full h-full object-cover brightness-85"
+              src="./assets/gimble.jpeg" 
+              alt="Stage 2: Target Lock - Thermal & Gimbal Lock" 
+              class="card-img w-full h-full object-cover object-center brightness-90"
+              style="object-fit: cover; object-position: center;"
               loading="lazy"
             />
             <div class="absolute top-3 left-3">
@@ -552,9 +553,10 @@
         <div class="nasa-card rounded overflow-hidden flex flex-col">
           <div class="relative aspect-video overflow-hidden">
             <img 
-              src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?q=80&w=800&auto=format&fit=crop" 
-              alt="Stage 3: Cold-Gas Intercept" 
-              class="card-img w-full h-full object-cover brightness-85"
+              src="./assets/gas.jpg" 
+              alt="Stage 3: Cold-Gas Intercept - Gas Micro-Pulse" 
+              class="card-img w-full h-full object-cover object-center brightness-90"
+              style="object-fit: cover; object-position: center;"
               loading="lazy"
             />
             <div class="absolute top-3 left-3">
@@ -579,127 +581,6 @@
     </section>
 
     <!-- ========================================================================
-         MISSION CONTROL LIVE TELEMETRY HUD
-         ======================================================================== -->
-    <section id="telemetry" class="py-16 sm:py-24 bg-nasa-surface/80 border-t border-white/10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 pb-4 border-b border-white/10 gap-4">
-          <div>
-            <span class="badge-nasa">COCKPIT & GROUND HUD</span>
-            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white uppercase mt-2">
-              Payload Telemetry Stream
-            </h2>
-          </div>
-          
-          <div class="flex items-center gap-3 font-mono text-xs">
-            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-            <span class="text-emerald-400 font-bold uppercase">DOWNLINK ACTIVE (LEO SIM)</span>
-          </div>
-        </div>
-
-        <!-- Telemetry Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          
-          <!-- Virtual Targeting Radar Canvas / Reticle -->
-          <div class="lg:col-span-2 rounded border border-white/15 bg-nasa-dark p-6 relative flex flex-col justify-between min-h-[380px] overflow-hidden">
-            <div class="space-grid-bg absolute inset-0 opacity-40"></div>
-            
-            <!-- Reticle HUD Center -->
-            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div class="w-64 h-64 border border-cyanx/20 rounded-full flex items-center justify-center relative">
-                <div class="w-48 h-48 border border-cyanx/30 rounded-full flex items-center justify-center">
-                  <div class="w-32 h-32 border border-solar/40 rounded-full animate-pulse flex items-center justify-center">
-                    <div class="w-3 h-3 bg-nasa-red rounded-full shadow-[0_0_12px_#e03c31]"></div>
-                  </div>
-                </div>
-                <!-- Crosshairs -->
-                <div class="absolute w-full h-px bg-cyanx/25"></div>
-                <div class="absolute h-full w-px bg-cyanx/25"></div>
-              </div>
-            </div>
-
-            <!-- Top HUD Bar -->
-            <div class="relative z-10 flex justify-between font-mono text-xs">
-              <span class="text-cyanx font-bold">TARGET: AVIONICS BAY 04</span>
-              <span class="text-slate-400">RADAR: ACTIVE TRACKING</span>
-            </div>
-
-            <!-- Bottom HUD Stats Bar -->
-            <div class="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-white/10 font-mono text-xs bg-nasa-dark/80 backdrop-blur rounded p-3">
-              <div>
-                <span class="text-slate-500 block text-[10px]">AZIMUTH</span>
-                <span id="liveAzimuth" class="text-white font-bold text-sm">124.0°</span>
-              </div>
-              <div>
-                <span class="text-slate-500 block text-[10px]">ELEVATION</span>
-                <span id="liveElevation" class="text-white font-bold text-sm">38.0°</span>
-              </div>
-              <div>
-                <span class="text-slate-500 block text-[10px]">CORE TEMP</span>
-                <span id="liveTemp" class="text-solar font-bold text-sm">74.2°C</span>
-              </div>
-              <div>
-                <span class="text-slate-500 block text-[10px]">PRESSURE</span>
-                <span id="livePressure" class="text-cyanx font-bold text-sm">149.8 PSI</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Mission Event Log & Health Status -->
-          <div class="rounded border border-white/15 bg-nasa-dark p-6 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between pb-3 border-b border-white/10 font-mono text-xs">
-                <span class="text-white font-bold">SYSTEM HEALTH</span>
-                <span class="text-emerald-400">100% NOMINAL</span>
-              </div>
-
-              <div class="mt-4 space-y-3 font-mono text-xs">
-                <div class="flex justify-between">
-                  <span class="text-slate-400">OPTICAL SENSOR</span>
-                  <span class="text-emerald-400 font-semibold">60 FPS // LOCKED</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-slate-400">MLX90614 THERMAL</span>
-                  <span class="text-emerald-400 font-semibold">CALIBRATED</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-slate-400">PAN-TILT ACTUATOR</span>
-                  <span class="text-emerald-400 font-semibold">HOMED (0, 0)</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-slate-400">SOLENOID VALVE</span>
-                  <span class="text-emerald-400 font-semibold">STANDBY READY</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-slate-400">DOWNLINK LATENCY</span>
-                  <span id="liveLatency" class="text-cyanx font-semibold">118 ms</span>
-                </div>
-              </div>
-
-              <!-- Event Log Console -->
-              <div class="mt-6 pt-4 border-t border-white/10 font-mono text-[11px] space-y-2">
-                <div class="text-slate-500 text-[10px] uppercase tracking-wider">Event Telemetry Log</div>
-                <div class="text-slate-300"><span class="text-slate-500">11:20:02</span> [SYS] Perception stream init</div>
-                <div class="text-slate-300"><span class="text-slate-500">11:20:15</span> [OPT] HSV spark detector active</div>
-                <div class="text-slate-300"><span class="text-slate-500">11:20:30</span> [IR] Thermal threshold 65°C set</div>
-                <div class="text-emerald-400"><span class="text-slate-500">11:21:00</span> [READY] Interceptor armed</div>
-              </div>
-            </div>
-
-            <div class="mt-6 pt-4 border-t border-white/10">
-              <a href="doc.html#bom" class="btn-nasa-secondary w-full text-center text-xs py-2">
-                View Hardware BOM Specs →
-              </a>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ========================================================================
          TECHNICAL DOCUMENTATION CALLOUT BANNER
          ======================================================================== -->
     <section class="py-16 sm:py-20 bg-gradient-to-r from-nasa-blue/20 via-nasa-surface to-nasa-blue/10 border-t border-white/10">
@@ -707,10 +588,10 @@
         <div>
           <span class="badge-nasa">TECHNICAL DOCUMENTATION</span>
           <h2 class="text-2xl sm:text-4xl font-extrabold text-white uppercase mt-2">
-            Engineering Specifications &amp; BOM
+            Engineering &amp; Subsystem Specifications
           </h2>
           <p class="text-slate-300 text-sm sm:text-base mt-2 max-w-2xl">
-            Access the complete NASA SP-format Technical Memorandum including pinout schematics, state-machine flowcharts, Bill of Materials, and academic project evaluation criteria.
+            Access the complete NASA SP-format Technical Memorandum including pinout schematics, state-machine flowcharts, sensor subsystems, and academic project evaluation criteria.
           </p>
         </div>
 
@@ -729,11 +610,9 @@
   <footer class="bg-nasa-dark border-t border-white/15 text-slate-300 pt-16 pb-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Top Row: Meatball + Agency Tagline + Newsletter -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-12 border-b border-white/10">
-        
-        <!-- Left: Insignia and Mission Quote -->
-        <div class="lg:col-span-6 space-y-4">
+      <!-- Top Row: Meatball + Agency Tagline -->
+      <div class="pb-12 border-b border-white/10">
+        <div class="space-y-4 max-w-2xl">
           <div class="flex items-center gap-3">
             <div class="w-9 h-9 rounded-full bg-nasa-blue flex items-center justify-center font-mono text-xs font-black text-white shadow-md">
               A
@@ -743,36 +622,13 @@
               <span class="text-xs text-slate-400 block font-mono">Autonomous Spacecraft Avionics Fire Interceptor</span>
             </div>
           </div>
-          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-lg">
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
             Rapid sub-second optical anomaly detection and cold-gas suppression for next-generation orbital platforms, space stations, and autonomous nanosatellite payloads.
           </p>
           <div class="text-xs font-mono text-slate-500">
             Engineering Clinics · VIT-AP University · Project Team: Paakhi &amp; Rahul
           </div>
         </div>
-
-        <!-- Right: NASA Mission Updates Subscribe Box -->
-        <div class="lg:col-span-6 flex flex-col justify-center">
-          <div class="bg-nasa-surface p-5 rounded border border-white/10">
-            <h4 class="text-sm font-bold text-white uppercase tracking-wider">Subscribe to Mission Telemetry Alerts</h4>
-            <p class="text-xs text-slate-400 mt-1">Receive technical updates, flight test reports, and hardware revisions.</p>
-            <form id="newsletterForm" class="mt-4 flex flex-col sm:flex-row gap-2">
-              <input 
-                type="email" 
-                required 
-                placeholder="Enter flight engineer email" 
-                class="bg-nasa-dark border border-white/20 rounded px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-nasa-blue flex-1"
-              />
-              <button type="submit" class="btn-nasa-primary text-xs py-2 px-5">
-                Subscribe
-              </button>
-            </form>
-            <div id="newsletterMsg" class="hidden mt-2 text-xs font-mono text-emerald-400">
-              ✓ Subscribed to ASAFI Mission Alerts downlink.
-            </div>
-          </div>
-        </div>
-
       </div>
 
       <!-- Middle Row: 4-Column Structured Directory -->
@@ -785,7 +641,7 @@
             <li><a href="#hero" class="hover:text-white transition-colors">LEO Avionics Shield</a></li>
             <li><a href="#lifecycle" class="hover:text-white transition-colors">Zero-G Cold Gas Intercept</a></li>
             <li><a href="#sensors" class="hover:text-white transition-colors">Vacuum Chamber Tests</a></li>
-            <li><a href="#telemetry" class="hover:text-white transition-colors">Sounding Rocket TRL-5</a></li>
+            <li><a href="#lifecycle" class="hover:text-white transition-colors">Sounding Rocket TRL-5</a></li>
             <li><a href="doc.html" class="hover:text-white transition-colors">CubeSat Deployment Specs</a></li>
           </ul>
         </div>
@@ -794,11 +650,11 @@
         <div>
           <h5 class="font-mono text-xs font-bold text-white uppercase tracking-widest mb-4">Technology &amp; Payloads</h5>
           <ul class="space-y-2.5 text-slate-400">
-            <li><a href="doc.html#sensors" class="hover:text-white transition-colors">OpenCV Vision Pipeline</a></li>
-            <li><a href="doc.html#sensors" class="hover:text-white transition-colors">MLX90614 Contactless IR</a></li>
-            <li><a href="doc.html#gimbal" class="hover:text-white transition-colors">Dual-Axis Servo Gimbal</a></li>
-            <li><a href="doc.html#valve" class="hover:text-white transition-colors">12V Solenoid Cold-Gas Valve</a></li>
-            <li><a href="doc.html#circuit" class="hover:text-white transition-colors">Power Distribution &amp; Relays</a></li>
+            <li><a href="doc.html#section3" class="hover:text-white transition-colors">YOLOv11 Vision Pipeline</a></li>
+            <li><a href="doc.html#section3" class="hover:text-white transition-colors">MLX90614 Contactless IR</a></li>
+            <li><a href="doc.html#section3" class="hover:text-white transition-colors">Dual-Axis Servo Gimbal</a></li>
+            <li><a href="doc.html#section3" class="hover:text-white transition-colors">12V Solenoid Cold-Gas Valve</a></li>
+            <li><a href="doc.html#section5" class="hover:text-white transition-colors">Power Distribution &amp; Relays</a></li>
           </ul>
         </div>
 
@@ -809,8 +665,8 @@
             <li><a href="#gallery" class="hover:text-white transition-colors">High-Res Mission Gallery</a></li>
             <li><a href="#sensors" class="hover:text-white transition-colors">Thermal Infrared Captures</a></li>
             <li><a href="#gallery" class="hover:text-white transition-colors">Cold-Gas Plume Imagery</a></li>
-            <li><a href="#telemetry" class="hover:text-white transition-colors">Live HUD Telemetry Feeds</a></li>
-            <li><a href="doc.html#diagrams" class="hover:text-white transition-colors">System CAD Schematics</a></li>
+            <li><a href="#sensors" class="hover:text-white transition-colors">Live HUD Sensor Feeds</a></li>
+            <li><a href="doc.html#section2" class="hover:text-white transition-colors">System CAD Schematics</a></li>
           </ul>
         </div>
 
@@ -819,10 +675,10 @@
           <h5 class="font-mono text-xs font-bold text-white uppercase tracking-widest mb-4">Technical Documents</h5>
           <ul class="space-y-2.5 text-slate-400">
             <li><a href="doc.html" class="text-cyanx font-semibold hover:text-white transition-colors">Flight Manual (NASA SP)</a></li>
-            <li><a href="doc.html#circuit" class="hover:text-white transition-colors">Wiring &amp; Pinout Tables</a></li>
-            <li><a href="doc.html#state-machine" class="hover:text-white transition-colors">Software State Machine</a></li>
-            <li><a href="doc.html#bom" class="hover:text-white transition-colors">Bill of Materials (BOM)</a></li>
-            <li><a href="doc.html#team" class="hover:text-white transition-colors">Project Team &amp; Faculty Review</a></li>
+            <li><a href="doc.html#section5" class="hover:text-white transition-colors">Wiring &amp; Pinout Tables</a></li>
+            <li><a href="doc.html#section4" class="hover:text-white transition-colors">Software State Machine</a></li>
+            <li><a href="doc.html#section3" class="hover:text-white transition-colors">Subsystem Specifications</a></li>
+            <li><a href="doc.html#section6" class="hover:text-white transition-colors">Project Team &amp; Faculty Review</a></li>
           </ul>
         </div>
 

@@ -88,13 +88,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const sensorData = {
     optical: {
       src: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop",
-      badge: "OPTICAL SENSING // 4K CV STREAM",
+      badge: "OPTICAL SENSING // YOLOV11 STREAM",
       title: "High-Speed Avionics Visual Tracking",
-      desc: "Edge-computed OpenCV detection runs at 60 FPS, isolating localized spark discharges and smoke particulate signatures.",
-      spec: "Latency: <16.6ms | Resolution: 1080p60 | Algorithm: HSV Contour & Frame Diff"
+      desc: "Edge-computed YOLOv11 detection operates at 15 FPS, isolating localized electrical arc discharges and thermal ignition signatures.",
+      spec: "Latency: <20ms | Resolution: 640 × 480 @ 15 FPS | Architecture: YOLOv11 Nano"
     },
     thermal: {
-      src: "https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=1600&auto=format&fit=crop",
+      src: "./assets/introduction-to-mlx90614.jpg",
       badge: "INFRARED RADIOMETRY // MLX90614",
       title: "Contactless Dual-Zone Pyrometry",
       desc: "Melexis MLX90614 medical-grade thermopile validates localized thermal gradient without electrical contact.",
@@ -136,31 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 4. Live HUD Telemetry Fluctuation Simulator
-  const liveTemp = document.getElementById('liveTemp');
-  const liveAzimuth = document.getElementById('liveAzimuth');
-  const liveElevation = document.getElementById('liveElevation');
-  const livePressure = document.getElementById('livePressure');
-  const liveLatency = document.getElementById('liveLatency');
-
-  if (liveTemp) {
-    setInterval(() => {
-      // Fluctuations around nominal baseline
-      const tempVal = (74.0 + (Math.random() * 0.5 - 0.25)).toFixed(1);
-      const azVal = (124.0 + (Math.random() * 0.4 - 0.2)).toFixed(1);
-      const elVal = (38.0 + (Math.random() * 0.4 - 0.2)).toFixed(1);
-      const pressVal = (149.5 + (Math.random() * 0.8 - 0.4)).toFixed(1);
-      const latVal = Math.floor(116 + Math.random() * 6);
-
-      liveTemp.textContent = `${tempVal}°C`;
-      liveAzimuth.textContent = `${azVal}°`;
-      liveElevation.textContent = `${elVal}°`;
-      livePressure.textContent = `${pressVal} PSI`;
-      if (liveLatency) liveLatency.textContent = `${latVal} ms`;
-    }, 1800);
-  }
-
-  // 5. Media Gallery Filtering
+  // 4. Media Gallery Filtering
   const filterBtns = document.querySelectorAll('.gallery-filter-btn');
   const galleryItems = document.querySelectorAll('.gallery-item');
 
@@ -185,22 +161,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
-
-  // 6. Mission Updates Newsletter Submission
-  const newsletterForm = document.getElementById('newsletterForm');
-  const newsletterMsg = document.getElementById('newsletterMsg');
-
-  if (newsletterForm && newsletterMsg) {
-    newsletterForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const emailInput = newsletterForm.querySelector('input[type="email"]');
-      if (emailInput && emailInput.value) {
-        newsletterMsg.classList.remove('hidden');
-        newsletterForm.reset();
-        setTimeout(() => {
-          newsletterMsg.classList.add('hidden');
-        }, 5000);
-      }
-    });
-  }
 });

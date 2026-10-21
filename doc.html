@@ -99,7 +99,7 @@
           <div class="flex justify-between"><span class="text-slate-500">PROJECT:</span> <span>ASAFI-LEO-01</span></div>
           <div class="flex justify-between"><span class="text-slate-500">INSTITUTION:</span> <span>VIT-AP University</span></div>
           <div class="flex justify-between"><span class="text-slate-500">PROGRAM:</span> <span>Engineering Clinics</span></div>
-          <div class="flex justify-between"><span class="text-slate-500">AUTHORS:</span> <span class="text-cyanx">Paakhi &amp; Rahul</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">AUTHOR:</span> <span class="text-cyanx">Utpalakshi Upadhyaya</span></div>
           <div class="flex justify-between"><span class="text-slate-500">STATUS:</span> <span class="text-emerald-400">TRL-5 VERIFIED</span></div>
         </div>
       </div>
@@ -122,8 +122,7 @@
             <li><a href="#section3" class="hover:text-cyanx block">3. Sensor &amp; Actuator Specs</a></li>
             <li><a href="#section4" class="hover:text-cyanx block">4. State Machine Sequence</a></li>
             <li><a href="#section5" class="hover:text-cyanx block">5. Wiring &amp; Pinout Table</a></li>
-            <li><a href="#section6" class="hover:text-cyanx block">6. Bill of Materials (BOM)</a></li>
-            <li><a href="#section7" class="hover:text-cyanx block">7. Team &amp; Faculty Review</a></li>
+            <li><a href="#section6" class="hover:text-cyanx block">6. Team &amp; Faculty Review</a></li>
           </ul>
           <div class="pt-4 border-t border-white/10">
             <a href="index.html" class="text-cyanx hover:underline flex items-center gap-1">
@@ -148,7 +147,7 @@
             In microgravity spaceflight environments, the absence of natural buoyancy inhibits traditional convective air movement. Electrical arcs, short circuits, or battery overheating inside sealed spacecraft avionics bays form localized, oxygen-starved smoldering pockets. Traditional whole-cabin flooding fire suppression systems introduce excessive toxic residue, cause mission-critical avionics shorting, and require human intervention that incurs prohibitive reaction delay (often &gt; 30 to 90 seconds).
           </p>
           <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-            <strong>ASAFI (Autonomous Spacecraft Avionics Fire Interceptor)</strong> introduces a closed-loop, localized autonomous payload combining edge computer vision (OpenCV), contactless infrared pyrometry (MLX90614), rapid 2-axis pan-tilt vectoring, and a high-speed 12V micro-solenoid cold-gas valve. Reaction latency is compressed to <strong>&lt; 120 milliseconds</strong>, neutralizing combustion at ignition without risking peripheral electronics.
+            <strong>ASAFI (Autonomous Spacecraft Avionics Fire Interceptor)</strong> introduces a closed-loop, localized autonomous payload combining edge computer vision (YOLOv11), contactless infrared pyrometry (MLX90614), rapid 2-axis pan-tilt vectoring, and a high-speed 12V micro-solenoid cold-gas valve. Reaction latency is compressed to <strong>&lt; 120 milliseconds</strong>, neutralizing combustion at ignition without risking peripheral electronics.
           </p>
         </section>
 
@@ -181,15 +180,15 @@
               <!-- Node 1: Optical Camera -->
               <rect x="20" y="30" width="140" height="70" rx="4" fill="url(#boxGrad)" stroke="#00e5ff" stroke-width="1.5" />
               <text x="90" y="60" fill="#00e5ff" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">OPTICAL CAMERA</text>
-              <text x="90" y="78" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">Visual Stream (60 FPS)</text>
+              <text x="90" y="78" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">Visual Stream (15 FPS)</text>
 
               <!-- Arrow 1 to 2 -->
               <line x1="160" y1="65" x2="220" y2="65" stroke="#00e5ff" stroke-width="2" marker-end="url(#arrow)" />
 
               <!-- Node 2: Edge CV Engine -->
               <rect x="220" y="30" width="160" height="70" rx="4" fill="url(#boxGrad)" stroke="#105bd8" stroke-width="1.5" />
-              <text x="300" y="60" fill="#60a5fa" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">OPENCV PERCEPTION</text>
-              <text x="300" y="78" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">HSV &amp; Spark Contours</text>
+              <text x="300" y="60" fill="#60a5fa" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">YOLOV11 PERCEPTION</text>
+              <text x="300" y="78" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">Arc &amp; Ignition Contours</text>
 
               <!-- Node 3: MLX90614 IR -->
               <rect x="220" y="140" width="160" height="70" rx="4" fill="url(#boxGrad)" stroke="#ff8a00" stroke-width="1.5" />
@@ -238,10 +237,10 @@
               <span class="text-xs font-mono text-cyanx font-bold">SUBSYSTEM 01</span>
               <h3 class="text-lg font-bold text-white mt-1">Optical Camera &amp; Vision</h3>
               <ul class="mt-4 space-y-2 font-mono text-xs text-slate-300">
-                <li>• <strong>Resolution:</strong> 1920 × 1080 @ 60 FPS</li>
+                <li>• <strong>Resolution:</strong> 640 × 480 @ 15 FPS (VGA)</li>
                 <li>• <strong>Field of View:</strong> 120° Wide Angle Lens</li>
-                <li>• <strong>Color Space:</strong> HSV Thresholding &amp; Grayscale</li>
-                <li>• <strong>Processing Latency:</strong> ~16ms per frame</li>
+                <li>• <strong>Architecture:</strong> Embedded YOLOv11 Model</li>
+                <li>• <strong>Processing Latency:</strong> ~20ms per inference</li>
                 <li>• <strong>Trigger:</strong> Rapid luminescence contour delta</li>
               </ul>
             </div>
@@ -301,14 +300,14 @@
               <span class="px-2 py-1 rounded bg-blue-600/30 text-cyanx font-bold">STATE 0</span>
               <div>
                 <b class="text-white">SURVEILLANCE / NOMINAL</b>
-                <p class="text-slate-400 mt-1">Continuous OpenCV background sampling (1080p @ 60 FPS). Servos stationary at default home position.</p>
+                <p class="text-slate-400 mt-1">Continuous YOLOv11 background sampling (640 × 480 @ 15 FPS). Servos stationary at default home position.</p>
               </div>
             </div>
             <div class="flex items-start gap-4">
               <span class="px-2 py-1 rounded bg-yellow-500/20 text-yellow-300 font-bold">STATE 1</span>
               <div>
                 <b class="text-white">ANOMALY CANDIDATE DETECTED</b>
-                <p class="text-slate-400 mt-1">OpenCV detects sudden local illumination spike above delta threshold. Bounding box coordinates calculated.</p>
+                <p class="text-slate-400 mt-1">YOLOv11 detects sudden local illumination spike above delta threshold. Bounding box coordinates calculated.</p>
               </div>
             </div>
             <div class="flex items-start gap-4">
@@ -395,126 +394,34 @@
                   <td class="p-3 text-blue-400">CSI / USB</td>
                   <td class="p-3">Dedicated Ribbon</td>
                   <td class="p-3">High-Speed MIPI</td>
-                  <td class="p-3">1080p60 Visual Telemetry</td>
+                  <td class="p-3">640×480 @ 15 FPS Visual Telemetry</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </section>
 
-        <!-- SECTION 6: BILL OF MATERIALS (BOM) -->
+        <!-- SECTION 6: PROJECT TEAM & ROLES -->
         <section id="section6" class="space-y-6">
           <div class="flex items-center gap-2">
-            <span class="badge-nasa">06 // BUDGET &amp; BOM</span>
+            <span class="badge-nasa">06 // TEAM ROSTER</span>
           </div>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">
-            6. Bill of Materials (BOM) &amp; Procurement Table
-          </h2>
-          <p class="text-slate-300 text-sm">
-            Detailed component breakdown prepared for Engineering Clinics (ECS) laboratory reimbursement and hardware procurement tracking.
-          </p>
-
-          <div class="overflow-x-auto">
-            <table class="w-full text-left font-mono text-xs border border-white/10 bg-nasa-surface">
-              <thead class="bg-nasa-dark border-b border-white/15 text-slate-400">
-                <tr>
-                  <th class="p-3">Item #</th>
-                  <th class="p-3">Component Description</th>
-                  <th class="p-3">Part / Model</th>
-                  <th class="p-3">Qty</th>
-                  <th class="p-3">Est. Cost (INR)</th>
-                  <th class="p-3">Status</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-white/5 text-slate-300">
-                <tr>
-                  <td class="p-3">BOM-01</td>
-                  <td class="p-3 font-semibold text-white">Infrared Non-Contact Thermometer</td>
-                  <td class="p-3 text-slate-400">Melexis MLX90614-ESF-BAA</td>
-                  <td class="p-3">1</td>
-                  <td class="p-3">₹ 1,250</td>
-                  <td class="p-3 text-emerald-400">✓ Procured</td>
-                </tr>
-                <tr>
-                  <td class="p-3">BOM-02</td>
-                  <td class="p-3 font-semibold text-white">Wide-Angle 1080p Optical Camera</td>
-                  <td class="p-3 text-slate-400">Sony IMX219 / 120° FOV</td>
-                  <td class="p-3">1</td>
-                  <td class="p-3">₹ 1,800</td>
-                  <td class="p-3 text-emerald-400">✓ Procured</td>
-                </tr>
-                <tr>
-                  <td class="p-3">BOM-03</td>
-                  <td class="p-3 font-semibold text-white">Dual-Axis Metal Gear Gimbal Servos</td>
-                  <td class="p-3 text-slate-400">MG996R High-Torque (2x)</td>
-                  <td class="p-3">2</td>
-                  <td class="p-3">₹ 980</td>
-                  <td class="p-3 text-emerald-400">✓ Procured</td>
-                </tr>
-                <tr>
-                  <td class="p-3">BOM-04</td>
-                  <td class="p-3 font-semibold text-white">12V DC Micro-Solenoid Gas Valve</td>
-                  <td class="p-3 text-slate-400">Normally Closed 1/4" NPT</td>
-                  <td class="p-3">1</td>
-                  <td class="p-3">₹ 650</td>
-                  <td class="p-3 text-emerald-400">✓ Procured</td>
-                </tr>
-                <tr>
-                  <td class="p-3">BOM-05</td>
-                  <td class="p-3 font-semibold text-white">Pressurized Nitrogen Mini Reservoir</td>
-                  <td class="p-3 text-slate-400">16g N2 Cartridge + Regulator</td>
-                  <td class="p-3">2</td>
-                  <td class="p-3">₹ 750</td>
-                  <td class="p-3 text-emerald-400">✓ Tested</td>
-                </tr>
-                <tr>
-                  <td class="p-3">BOM-06</td>
-                  <td class="p-3 font-semibold text-white">MOSFET Actuator Switch Circuit</td>
-                  <td class="p-3 text-slate-400">IRLZ44N Logic Level + Diode</td>
-                  <td class="p-3">1</td>
-                  <td class="p-3">₹ 120</td>
-                  <td class="p-3 text-emerald-400">✓ Assembled</td>
-                </tr>
-                <tr>
-                  <td class="p-3">BOM-07</td>
-                  <td class="p-3 font-semibold text-white">3D Printed Gimbal Bracket Chassis</td>
-                  <td class="p-3 text-slate-400">PETG Aerospace Bracket</td>
-                  <td class="p-3">1</td>
-                  <td class="p-3">₹ 350</td>
-                  <td class="p-3 text-emerald-400">✓ Fabricated</td>
-                </tr>
-              </tbody>
-              <tfoot class="border-t border-white/15 bg-nasa-dark text-white font-bold">
-                <tr>
-                  <td colspan="4" class="p-3 text-right">TOTAL ESTIMATED BUDGET:</td>
-                  <td colspan="2" class="p-3 text-cyanx">₹ 5,900 INR</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </section>
-
-        <!-- SECTION 7: PROJECT TEAM & ROLES -->
-        <section id="section7" class="space-y-6">
-          <div class="flex items-center gap-2">
-            <span class="badge-nasa">07 // TEAM ROSTER</span>
-          </div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">
-            7. Engineering Clinics Project Roster
+            6. Engineering Clinics Project Roster
           </h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="bg-nasa-surface p-6 rounded border border-white/10">
-              <span class="text-xs font-mono text-cyanx font-bold">LEAD FLIGHT ENGINEER</span>
-              <h3 class="text-xl font-bold text-white mt-1">Paakhi</h3>
+              <span class="text-xs font-mono text-cyanx font-bold">LEAD FLIGHT ENGINEER &amp; UI/UX SPECIALIST</span>
+              <h3 class="text-xl font-bold text-white mt-1">Utpalakshi Upadhyaya</h3>
               <p class="text-xs font-mono text-slate-400 mt-2">VIT-AP University · Engineering Clinics</p>
               <p class="text-sm text-slate-300 mt-3">
-                Responsible for Optical Computer Vision pipeline, OpenCV algorithms, MLX90614 sensor integration, and system documentation.
+                Responsible for Optical Computer Vision pipeline, YOLOv11 algorithms, MLX90614 sensor integration, and complete NASA SP specification portal design.
               </p>
             </div>
 
             <div class="bg-nasa-surface p-6 rounded border border-white/10">
               <span class="text-xs font-mono text-solar font-bold">LEAD SYSTEMS ENGINEER</span>
-              <h3 class="text-xl font-bold text-white mt-1">Rahul</h3>
+              <h3 class="text-xl font-bold text-white mt-1">Flight Systems Team</h3>
               <p class="text-xs font-mono text-slate-400 mt-2">VIT-AP University · Engineering Clinics</p>
               <p class="text-sm text-slate-300 mt-3">
                 Responsible for 2-axis servo kinematics, 12V solenoid valve actuation, pressurized cold-gas manifold design, and physical testbed.
