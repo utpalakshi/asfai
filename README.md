@@ -25,7 +25,7 @@ Designed as a modern, image-forward aerospace project portal inspired by **[NASA
    - Software State Machine (States 0 through 4).
    - Hardware Pinout & Wiring Table.
    - Bill of Materials (BOM) & ECS Reimbursement Tracker.
-   - Engineering Clinics team roster (Paakhi & Rahul).
+   - Engineering Clinics team roster (Utpalakshi & Rahul).
    - One-click "Print / Save PDF" formatting.
 
 4. **Interactive Mission Features**:
